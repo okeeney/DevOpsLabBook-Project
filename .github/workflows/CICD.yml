@@ -58,7 +58,6 @@ jobs:
       cancel-in-progress: true
     environment:
       name: Development
-      url: 'https://devbesapi.evoice.com/spamfilterservices/'
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
