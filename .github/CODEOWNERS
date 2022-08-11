@@ -1,0 +1,8 @@
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
+
+# Protect the CODEOWNERS file
+.github/CODEOWNERS @okeeney
+
+# Protect the GitHub workflows.
+.github/workflows @okeeney
