@@ -2,6 +2,7 @@ name: build and test
 on:
   push:
   pull_request:
+  workflow_dispatch:
     branches: [ main ]
     paths-ignore:
     - 'README.md'
@@ -26,6 +27,16 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      
+  security:
+    name: Execute Snyk
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/dotnet@main
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       
   super-linter:
     name: Lint Code Base
