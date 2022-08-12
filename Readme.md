@@ -1,4 +1,4 @@
-# the quality report can be checked at the following link:
+# The quality report can be checked at the following link:
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=okeeney_DevOpsLabBook-Project&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=okeeney_DevOpsLabBook-Project)
 
 
