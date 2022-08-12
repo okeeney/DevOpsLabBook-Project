@@ -30,52 +30,6 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       
-  sonarcloud:
-    name: SAST Scan (SonarCloud)
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-        with: 
-           # Disable shallow clones for improved analysis relevency.
-           fetch-depth: 0
-      - name: Set up dotnet
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 6.0.x
-          distribution: 'microsoft'
-      
-      # Speed-up analysis by caching the scanner workspace
-      - name: Cache SonarCloud workspace
-        uses: actions/cache@v1
-        with:
-          path: ~\.sonar\cache
-          key: ${{ runner.os }}-sonar-cache
-          restore-keys: ${{ runner.os }}-sonar-cache
-          
-      # Speed-up analysis by caching the scanner installation
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v1
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-          
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: powershell
-        run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner 
-      - name: Build
-        shell: powershell
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"devopslabbookproject" /o:"devopslabbookproject" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build ImageTextExtraction.sln
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-      
   super-linter:
     name: Lint Code Base
     if: ${{ !startsWith(github.ref, 'refs/tags') }}
