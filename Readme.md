@@ -1,3 +1,8 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=okeeney_DevOpsLabBook-Project&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=okeeney_DevOpsLabBook-Project)
+
+
+
+
 # ASP.NET Core Web API Serverless Application
 
 This project shows how to run an ASP.NET Core Web Application as a serverless application. The NuGet package [Amazon.Lambda.AspNetCoreServer](https://www.nuget.org/packages/Amazon.Lambda.AspNetCoreServer) contains a Lambda function that is used to translate requests from API Gateway into the ASP.NET Core framework and then the responses from ASP.NET Core back to API Gateway.
