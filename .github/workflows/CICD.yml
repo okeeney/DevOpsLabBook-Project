@@ -68,6 +68,9 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    - name: print-environment
+      run: |
+        echo 'Deployed to dev environment.'
    
   deploy-staging:
     name: Deploy to QA
@@ -85,6 +88,9 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    - name: print-environment
+      run: |
+        echo 'Deployed to QA environment.'
    
   deploy-production:
     name: Deploy to Production
@@ -102,4 +108,7 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    - name: print-environment
+      run: |
+        echo 'Deployed to production environment.'
   
