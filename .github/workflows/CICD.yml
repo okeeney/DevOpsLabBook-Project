@@ -32,6 +32,7 @@ jobs:
       
   super-linter:
     name: Lint Code Base
+    needs: [build-and-test]
     if: ${{ !startsWith(github.ref, 'refs/tags') }}
     runs-on: ubuntu-latest
     steps:
@@ -53,7 +54,7 @@ jobs:
     
   deploy-development:
     name: Deploy to Development
-    needs: [super-linter]
+    needs: [build-and-test]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     concurrency: 
