@@ -51,67 +51,73 @@ jobs:
         # Change to 'master' if your main branch differs
         DEFAULT_BRANCH: main
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+        
   deploy-development:
-    name: Deploy to Development
+    name: Deploy to Dev
     needs: [build-and-test]
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     concurrency: 
       group: ${{github.repository}}-${{ github.workflow }}-development
       cancel-in-progress: true
     environment:
       name: Development
-      url: 'https://www.sampledevelopmenturl.com'
+      url: 'http://dev.myapp.com'
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: print-environment
-      run: |
-        echo 'Deployed to dev environment.'
+      - name: Deploy
+        run: |
+              echo 'Your code is being deployed to dev.myapp.com!'
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: print-environment
+        run: |
+          echo 'Deployed to dev environment.'
    
   deploy-staging:
     name: Deploy to QA
     needs: [deploy-development]
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     concurrency: 
-      group: ${{github.repository}}-${{ github.workflow }}-qa
+      group: ${{github.repository}}-${{ github.workflow }}-development
       cancel-in-progress: true
     environment:
-      name: QA
-      url: 'https://www.sampleqaurl.com'
+      name: Development
+      url: 'http://qa.myapp.com'
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: print-environment
-      run: |
-        echo 'Deployed to QA environment.'
+      - name: Deploy
+        run: | 
+            echo 'Your code is being deployed to qa.myapp.com!'
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: print-environment
+        run: |
+          echo 'Deployed to dev environment.'
    
   deploy-production:
-    name: Deploy to Production
+    name: Deploy to Prod
     needs: [deploy-staging]
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     concurrency: 
-      group: ${{github.repository}}-${{ github.workflow }}-production
+      group: ${{github.repository}}-${{ github.workflow }}-development
       cancel-in-progress: true
     environment:
-      name: Production
-      url: 'https://www.sampleproduction.com'
+      name: Development
+      url: 'http://prod.myapp.com'
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: print-environment
-      run: |
-        echo 'Deployed to production environment.'
+      - name: Deploy
+        run: |
+            echo 'Your code is being deployed to prod.myapp.com!'
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: print-environment
+        run: |
+          echo 'Deployed to dev environment.'
   
