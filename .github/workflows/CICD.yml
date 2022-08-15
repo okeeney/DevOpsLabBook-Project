@@ -83,7 +83,7 @@ jobs:
       group: ${{github.repository}}-${{ github.workflow }}-development
       cancel-in-progress: true
     environment:
-      name: Development
+      name: QA
       url: 'http://qa.myapp.com'
     steps:
       - name: Deploy
@@ -106,7 +106,7 @@ jobs:
       group: ${{github.repository}}-${{ github.workflow }}-development
       cancel-in-progress: true
     environment:
-      name: Development
+      name: Production
       url: 'http://prod.myapp.com'
     steps:
       - name: Deploy
