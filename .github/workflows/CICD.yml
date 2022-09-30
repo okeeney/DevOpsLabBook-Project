@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
@@ -68,7 +68,7 @@ jobs:
               echo 'Your code is being deployed to dev.myapp.com!'
       - uses: actions/checkout@v3
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
       - name: print-environment
@@ -91,7 +91,7 @@ jobs:
             echo 'Your code is being deployed to qa.myapp.com!'
       - uses: actions/checkout@v3
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
       - name: print-environment
@@ -114,7 +114,7 @@ jobs:
             echo 'Your code is being deployed to prod.myapp.com!'
       - uses: actions/checkout@v3
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
       - name: print-environment
